@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 3e8bc5155c4c9ed46a63ac64c06408f3, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -147,8 +147,8 @@ Transform:
   m_GameObject: {fileID: 226548146}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.15, y: 0.58, z: -0.3}
-  m_LocalScale: {x: 2.2021, y: 4.3572006, z: 2.2021}
+  m_LocalPosition: {x: -0.15, y: 1.32, z: -0.08}
+  m_LocalScale: {x: 3, y: 5, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 510420500}
@@ -172,8 +172,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0
+  m_Height: 1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &226548150
@@ -201,7 +201,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ee8334d370478e84da726801fff44287, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -244,6 +244,7 @@ GameObject:
   - component: {fileID: 510420500}
   - component: {fileID: 510420502}
   - component: {fileID: 510420503}
+  - component: {fileID: 510420504}
   m_Layer: 0
   m_Name: Airplane
   m_TagString: Untagged
@@ -260,8 +261,8 @@ Transform:
   m_GameObject: {fileID: 510420499}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.22, y: 1.06, z: -47.64}
-  m_LocalScale: {x: 1, y: 1, z: 1.0824503}
+  m_LocalPosition: {x: 0.17757, y: 1.2481, z: 4.2274}
+  m_LocalScale: {x: 0.71716, y: 0.71716, z: 0.71716}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 226548147}
@@ -276,9 +277,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510420499}
   serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Mass: 50
+  m_LinearDamping: 0.4
+  m_AngularDamping: 2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -292,9 +293,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &510420503
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -315,9 +316,31 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
+  m_Height: 2
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &510420504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510420499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961f407533b9c964faa67431d8b7b32b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  thrust: 50
+  liftCoefficient: 0.02
+  dragCoefficient: 0.02
+  sideDrag: 2
+  turnStrength: 0.5
+  stallAngle: 35
+  stallLiftMultiplier: 0.3
+  pitchPower: 15
+  rollPower: 20
+  yawPower: 15
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +449,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -500,13 +524,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16264258, y: -0, z: -0, w: 0.9866851}
-  m_LocalPosition: {x: 0, y: 9.35, z: -60}
+  m_LocalRotation: {x: 0.12909845, y: 0, z: 0, w: 0.9916318}
+  m_LocalPosition: {x: 0, y: 3, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 18.721, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 14.835, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d18e142d9c3544cb8ba0f0c2432a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleFollowCamera
+  target: {fileID: 510420500}
+  offset: {x: 0, y: 3, z: -8}
+  smoothSpeed: 20
 --- !u!1 &1232912161
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,8 +572,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232912161}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15, y: 0.7, z: 0.89}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.15, y: 1.72, z: 0.31}
   m_LocalScale: {x: 6.767, y: 0.27228776, z: 1.5453002}
   m_ConstrainProportionsScale: 0
   m_Children: []
